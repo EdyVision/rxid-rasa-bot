@@ -1,0 +1,75 @@
+version: "2.0"
+
+intents:
+  - greet
+  - goodbye
+  - affirm
+  - deny
+  - mood_great
+  - mood_unhappy
+  - bot_challenge
+  - thankyou
+  - restart
+  - help
+  # - identify_drug
+  # - get_drug_identifiers
+  # - get_drug_classification
+
+# entities:
+# - drug_color
+# - drug_shape
+# - drug_imprint
+# - number
+# slots:
+#   drug_color:
+#     type: unfeaturized
+#   drug_shape:
+#     type: unfeaturized
+#   drug_imprint:
+#     type: unfeaturized
+
+responses:
+  utter_greet:
+  - text: "Hey! How are you?"
+
+  utter_cheer_up:
+  - text: "Here is something to cheer you up:"
+    image: "https://i.imgur.com/nGF1K8f.jpg"
+
+  utter_did_that_help:
+  - text: "Did that help you?"
+
+  utter_happy:
+  - text: "Great, carry on!"
+  utter_goodbye:
+  - text: "Bye"
+  utter_iamabot:
+  - text: "I am a bot, built by EdyVision and powered by Rasa. I help identify prescriptions."
+  utter_gratitude_acknowledgement:
+  - text: "You're welcome."
+  utter_affirmation_acknowledgement:
+  - text: "Perfect"
+  utter_noworries:
+  - text: You're welcome :)
+  utter_ask_whatelse:
+  - text: What else can I help you with?
+  utter_ask_rephrase:
+  - text: I didn't quite understand that. Can you rephrase?
+  utter_ok:
+  - text: 👍
+  utter_ask_continue:
+  - text: Would you like to continue?
+  utter_help:
+    - text: "I can help you identify your prescriptions.
+        \nYou can ask me things like:
+        \n- What are the identifiers of lipitor?
+        \n- Identify this pill
+        \n- what is the classification of lipitor?"
+
+# actions:
+# - action_identify_drug
+# - action_restart
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
