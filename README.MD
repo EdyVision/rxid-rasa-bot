@@ -13,6 +13,7 @@ rasa train
 After a successful training, execute the following to communicate with the bot.
 
 ```bash
+rasa shell #or
 rasa shell --debug
 ```
 
@@ -21,7 +22,7 @@ rasa shell --debug
 The actions server will need to be running in a separate terminal window with the followng:
 
 ```bash
-rasa run actions
+rasa run actions --port 5056
 ```
 
 To run the bot locally, use Rasa X

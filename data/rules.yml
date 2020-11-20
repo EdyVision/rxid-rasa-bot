@@ -27,3 +27,8 @@ rules:
   - intent: greet
   - action: utter_greet
   - action: utter_help
+
+- rule: Full search anytime the user says all three slots
+  steps:
+  - intent: identify_drug_full_search
+  - action: action_identify_drug_full_search

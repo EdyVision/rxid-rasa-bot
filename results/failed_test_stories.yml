@@ -1,0 +1,52 @@
+version: "2.0"
+stories:
+- story: happy path 1 (/var/folders/f5/ns_4z2210d9dq2r1wq811j5c0000gn/T/tmp22sn1j12/1267e9a362f84989be67393e809e2fb1_test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_listen  # predicted: utter_help
+  - intent: mood_great
+  - action: utter_happy  # predicted: action_default_fallback
+- story: happy path 2 (/var/folders/f5/ns_4z2210d9dq2r1wq811j5c0000gn/T/tmp22sn1j12/1267e9a362f84989be67393e809e2fb1_test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_listen  # predicted: utter_help
+  - intent: mood_great
+  - action: utter_happy  # predicted: action_default_fallback
+  - intent: goodbye
+  - action: utter_goodbye
+- story: sad path 1 (/var/folders/f5/ns_4z2210d9dq2r1wq811j5c0000gn/T/tmp22sn1j12/1267e9a362f84989be67393e809e2fb1_test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_listen  # predicted: utter_help
+  - intent: mood_unhappy
+  - action: utter_cheer_up  # predicted: utter_iamabot
+  - action: utter_did_that_help  # predicted: action_listen
+  - intent: affirm
+  - action: utter_happy  # predicted: utter_ok
+- story: sad path 2 (/var/folders/f5/ns_4z2210d9dq2r1wq811j5c0000gn/T/tmp22sn1j12/1267e9a362f84989be67393e809e2fb1_test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_listen  # predicted: utter_help
+  - intent: mood_unhappy
+  - action: utter_cheer_up  # predicted: utter_iamabot
+  - action: utter_did_that_help  # predicted: action_listen
+  - intent: deny
+  - action: utter_goodbye  # predicted: action_identify_drug_full_search
+- story: sad path 3 (/var/folders/f5/ns_4z2210d9dq2r1wq811j5c0000gn/T/tmp22sn1j12/1267e9a362f84989be67393e809e2fb1_test_stories.yml)
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - action: action_listen  # predicted: utter_help
+  - intent: mood_unhappy
+  - action: utter_cheer_up  # predicted: utter_iamabot
+  - action: utter_did_that_help  # predicted: action_listen
+  - intent: deny
+  - action: utter_goodbye  # predicted: action_identify_drug_full_search
+- story: identify janumet (/var/folders/f5/ns_4z2210d9dq2r1wq811j5c0000gn/T/tmp22sn1j12/1267e9a362f84989be67393e809e2fb1_test_stories.yml)
+  steps:
+  - intent: identify_drug_full_search  # predicted: identify_drug: identify this green and oval pill that says eighty
+  - action: action_identify_drug_full_search

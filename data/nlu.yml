@@ -3,19 +3,23 @@ version: "2.0"
 nlu:
 - intent: greet
   examples: |
-    - hey
-    - hello
-    - hi
-    - hello there
     - good morning
-    - good evening
-    - moin
+    - hi
     - hey there
-    - let's go
-    - hey dude
-    - goodmorning
-    - goodevening
-    - good afternoon
+    - hey
+    - good evening
+    - hello
+    - Hello?
+    - HEY
+    - hello are you still there
+    - hallo
+    - HI
+    - Hey
+    - Hi
+    - hi!
+    - hello there
+    - hi there
+    - Hello
 
 - intent: goodbye
   examples: |
@@ -33,22 +37,36 @@ nlu:
 
 - intent: affirm
   examples: |
-    - yes
-    - y
     - indeed
-    - of course
-    - that sounds good
     - correct
+    - that sounds good
+    - yes
+    - yess please
+    - of course
+    - yup
+    - yeah
+    - yes please
+    - yes plz
+    - Sure
+    - Ok
+    - sweet
+    - cool,
+    - yes...
+    - y
 
 - intent: deny
   examples: |
-    - no
-    - n
-    - never
-    - I don't think so
-    - don't like that
-    - no way
     - not really
+    - no
+    - I don't think so
+    - never
+    - no way
+    - nope
+    - no thanks
+    - I dunno
+    - Nothing!
+    - nevermind
+    - n
 
 - intent: mood_great
   examples: |
@@ -90,3 +108,131 @@ nlu:
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
+
+- intent: identify_drug
+  examples: |
+    - identify this pill
+    - identify this drug
+    - what is this pill?
+    - what is this drug?
+    - what is this prescription?
+    - identify this prescription
+    - I don't know what this pill is
+    - I don't know what this drug is
+    - I don't know what this prescription is
+
+- intent: thankyou
+  examples: |
+    - thank you goodbye
+    - okay thank you goodbye
+    - thank you bye
+    - um okay thank you good bye
+    - thank you
+    - and thats all thank you and good bye
+    - okay thank you
+    - thanks
+    - thanks goodbye
+    - thank you and good bye
+    - Thanks!
+
+- intent: search_drug_by_name
+  examples: |
+    - identifiers of [lipitor](drug_name)
+    - identifiers of [tylenol](drug_name)
+    - identifiers of [metformin](drug_name)
+    - what are the identifiers of [lipitor](drug_name)
+    - what are the identifiers of [tylenol](drug_name)
+    - what are the identifiers of [metformin](drug_name)
+
+- intent: color_identifier
+  examples: |
+    - [green](drug_color)
+    - [white](drug_color)
+    - [red](drug_color)
+    - [blue](drug_color)
+    - [orange](drug_color)
+    - [purple](drug_color)
+    - it is [green](drug_color)
+    - it is [white](drug_color)
+    - it is [red](drug_color)
+    - it is [blue](drug_color)
+    - it is [orange](drug_color)
+    - it is [purple](drug_color)
+    - it appears [green](drug_color)
+    - it appears [white](drug_color)
+    - it appears [red](drug_color)
+    - it appears [blue](drug_color)
+    - it appears [orange](drug_color)
+    - it appears [purple](drug_color)
+    - maybe [orange](drug_color)
+    - perhaps [purple](drug_color)
+    - possibly [white](drug_color)
+    - seems [brown](drug_color)
+
+- intent: shape_identifier
+  examples: |
+    - [oval](drug_shape)
+    - [round](drug_shape)
+    - [square](drug_shape)
+    - appears [oval](drug_shape)
+    - appears [round](drug_shape)
+    - appears [square](drug_shape)
+    - looks [oval](drug_shape)
+    - looks [round](drug_shape)
+    - looks [square](drug_shape)
+    - it is [oval](drug_shape)
+    - it is [round](drug_shape)
+    - it is [square](drug_shape)
+    - perhaps [round](drug_shape)
+    - maybe [square](drug_shape)
+
+- intent: imprint_identifier
+  examples: |
+    - [eighty](drug_imprint)
+    - [ten](drug_imprint)
+    - [fifteen](drug_imprint)
+    - [fifty](drug_imprint)
+    - [five hundred](drug_imprint)
+    - [five-hundred](drug_imprint)
+    - [twenty](drug_imprint)
+    - [thirty](drug_imprint)
+    - it says [eighty](drug_imprint)
+    - it says [ten](drug_imprint)
+    - it says [fifteen](drug_imprint)
+    - it says [fifty](drug_imprint)
+    - it says [five hundred](drug_imprint)
+    - it says [five-hundred](drug_imprint)
+    - it says [twenty](drug_imprint)
+    - it says [thirty](drug_imprint)
+    - just [eighty](drug_imprint)
+    - just [ten](drug_imprint)
+    - looks like [fifteen](drug_imprint)
+    - just [fifty](drug_imprint)
+    - just [five hundred](drug_imprint)
+    - just [five-hundred](drug_imprint)
+    - just [twenty](drug_imprint)
+    - just [thirty](drug_imprint)
+
+- intent: identify_drug_full_search
+  examples: |
+    - identify this [green](drug_color) pill with an [oval](drug_shape) shape and an imprint of [eighty](drug_imprint)
+    - identify this [green](drug_color) pill with [oval](drug_shape) shape and imprint of [eighty](drug_imprint)
+    - identify this [green](drug_color) drug with [oval](drug_shape) shape and imprint of [eighty](drug_imprint)
+    - identify this [green](drug_color) pill with [oval](drug_shape) shape and imprint of [eighty](drug_imprint)
+    - identify [green](drug_color) pill with an [oval](drug_shape) shape and an imprint of [eighty](drug_imprint)
+    - identify [green](drug_color) pill with [oval](drug_shape) shape and imprint of [eighty](drug_imprint)
+    - identify [green](drug_color) drug with [oval](drug_shape) shape and imprint of [eighty](drug_imprint)
+    - identify [green](drug_color) pill with [oval](drug_shape) shape and imprint of [eighty](drug_imprint)
+    - [green](drug_color) pill with an [oval](drug_shape) shape and an imprint of [eighty](drug_imprint)
+    - [green](drug_color) pill with [oval](drug_shape) shape and imprint of [eighty](drug_imprint)
+    - [green](drug_color) drug with [oval](drug_shape) shape and imprint of [eighty](drug_imprint)
+    - [green](drug_color) pill with [oval](drug_shape) shape and imprint of [eighty](drug_imprint)
+    - [green](drug_color) pill with an [oval](drug_shape) shape and an imprint of [eighty](drug_imprint)
+    - [green](drug_color) pill with [oval](drug_shape) shape and imprint of [eighty](drug_imprint)
+    - [green](drug_color) drug with [oval](drug_shape) shape and imprint of [eighty](drug_imprint)
+    - [green](drug_color) pill with [oval](drug_shape) shape and imprint of [eighty](drug_imprint)
+    - [white](drug_color) [round](drug_shape) pill with imprint of [eighty](drug_imprint)
+    - [white](drug_color) [round](drug_shape) pill with an imprint of [eighty](drug_imprint)
+    - [white](drug_color) [round](drug_shape) pill that says [eighty](drug_imprint)
+    - [white](drug_color) [round](drug_shape) drug with an imprint of [eighty](drug_imprint)
+    - [white](drug_color) [round](drug_shape) drug that says [eighty](drug_imprint)

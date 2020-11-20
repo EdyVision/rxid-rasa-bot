@@ -2,12 +2,20 @@ version: "2.0"
 
 stories:
 
-# - story: happy path
-#   steps:
-#   - intent: greet
-#   - action: utter_greet
-#   - intent: help
-#   - action: utter_help
+- story: identify drug full search happy path 1
+  steps:
+  - intent: identify_drug_full_search
+  - action: action_identify_drug_full_search
+
+- story: pill identification happy path 1
+  steps:
+  - intent: identify_drug
+  - action: action_identify_drug
+
+- story: search drug by name happy path 1
+  steps:
+  - intent: search_drug_by_name
+  - action: action_search_drug_by_name
 
 # - story: sad path 1
 #   steps:
@@ -41,14 +49,3 @@ stories:
   - action: utter_iamabot
   - intent: affirm
   - action: utter_ok
-
-# - story: pill identification happy path 1
-#   steps:
-#   - intent: greet
-#   - action: utter_greet
-#   - intent: identify_drug
-#   - action: action_identify_drug
-#   - action: utter_did_that_help
-#   - intent: affirm
-#   - action: utter_affirmation_acknowledgement
-#   - action: utter_goodbye

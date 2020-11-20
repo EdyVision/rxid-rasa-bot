@@ -11,22 +11,28 @@ intents:
   - thankyou
   - restart
   - help
-  # - identify_drug
-  # - get_drug_identifiers
-  # - get_drug_classification
+  - identify_drug
+  - identify_drug_full_search
+  - search_drug_by_name
+  - color_identifier
+  - shape_identifier
+  - imprint_identifier
 
-# entities:
-# - drug_color
-# - drug_shape
-# - drug_imprint
-# - number
-# slots:
-#   drug_color:
-#     type: unfeaturized
-#   drug_shape:
-#     type: unfeaturized
-#   drug_imprint:
-#     type: unfeaturized
+entities:
+- drug_color
+- drug_shape
+- drug_imprint
+- drug_name
+- number
+slots:
+  drug_color:
+    type: any
+  drug_shape:
+    type: any
+  drug_imprint:
+    type: any
+  drug_name:
+    type: any
 
 responses:
   utter_greet:
@@ -65,10 +71,14 @@ responses:
         \n- What are the identifiers of lipitor?
         \n- Identify this pill
         \n- what is the classification of lipitor?"
+  utter_what_is_the_pill_color:
+  - text: "Ok, I can help with that. I'll need some information from you first. What is the color of the pill?"
 
-# actions:
-# - action_identify_drug
-# - action_restart
+actions:
+- action_identify_drug
+- action_restart
+- action_identify_drug_full_search
+- action_search_drug_by_name
 
 session_config:
   session_expiration_time: 60
