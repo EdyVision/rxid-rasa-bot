@@ -140,6 +140,7 @@ nlu:
     - identifiers of [lipitor](drug_name)
     - identifiers of [tylenol](drug_name)
     - identifiers of [metformin](drug_name)
+    - identifiers of [janumet](drug_name)
     - what are the identifiers of [lipitor](drug_name)
     - what are the identifiers of [tylenol](drug_name)
     - what are the identifiers of [metformin](drug_name)

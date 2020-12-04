@@ -1,14 +1,8 @@
-# This files contains your custom actions which can be used to run
-# custom Python code.
-#
-# See this guide on how to implement these action:
-# https://rasa.com/docs/rasa/custom-actions
-
-
-# This is a simple example for a custom action which utters "Hello World!"
-
 from typing import Any, Text, Dict, List
 import logging
+import requests
+import os
+import json
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import (
@@ -59,8 +53,21 @@ class ActionSearchDrugByName(Action):
         slots["drug_name"] = tracker.get_slot("drug_name")
 
         ## Confirm search for user
-        search_confirmation = "Performing search for {name}."
-        dispatcher.utter_message(text=search_confirmation.format(name=slots["drug_name"]))
+        search_confirmation_message = "Performing search for {name}."
+        dispatcher.utter_message(text=search_confirmation_message.format(name=slots["drug_name"]))
+
+        ## Perform search
+        search_url = os.environ.get('RXID_DRUG_SEARCH_URL') + '/dev/drug/search/getRxIdentifier?drugName=' + slots["drug_name"]
+        search_response = requests.get(search_url, headers={"x-api-key":os.environ.get('RXID_DRUG_SEARCH_API_KEY')})
+        if search_response.status_code == 200:
+            # The search was successful
+            response_content = json.loads(search_response.content)["identifier"]["nlmRxImages"]
+            search_success_message = "Found a match for {name}. Response={response}"
+            dispatcher.utter_message(text=search_success_message.format(name=slots["drug_name"], response=response_content[0]))
+        else:
+            # The search was unsuccessful
+            search_failure_message = "The search for {name} was unsuccessful. The error was {error}"
+            dispatcher.utter_message(text=search_failure_message.format(name=slots["drug_name"], error=search_response.content))
 
         return [SlotSet(slot, value) for slot, value in slots.items()]
 
