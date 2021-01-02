@@ -3,6 +3,7 @@ import logging
 import requests
 import os
 import json
+from .rxid_search import rxid_search_util
 from rasa_sdk import Action, Tracker
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import (
@@ -16,6 +17,9 @@ from rasa_sdk.events import (
 )
 
 logger = logging.getLogger(__name__)
+
+_rx_id_url = os.environ.get('RXID_DRUG_SEARCH_URL')
+_rx_id_api_key = os.environ.get('RXID_DRUG_SEARCH_API_KEY')
 
 class ActionIdentifyDrug(Action):
 
@@ -57,13 +61,15 @@ class ActionSearchDrugByName(Action):
         dispatcher.utter_message(text=search_confirmation_message.format(name=slots["drug_name"]))
 
         ## Perform search
-        search_url = os.environ.get('RXID_DRUG_SEARCH_URL') + '/dev/drug/search/getRxIdentifier?drugName=' + slots["drug_name"]
-        search_response = requests.get(search_url, headers={"x-api-key":os.environ.get('RXID_DRUG_SEARCH_API_KEY')})
+        search_url = _rx_id_url + '/dev/drug/search/getRxIdentifier?drugName=' + slots["drug_name"]
+        search_response = requests.get(search_url, headers={"x-api-key":_rx_id_api_key})
         if search_response.status_code == 200:
             # The search was successful
             response_content = json.loads(search_response.content)["identifier"]["nlmRxImages"]
-            search_success_message = "Found a match for {name}. Response={response}"
-            dispatcher.utter_message(text=search_success_message.format(name=slots["drug_name"], response=response_content[0]))
+
+            # Check to see if more than one match came back
+            search_success_message = rxid_search_util.is_multiple_match(self, search_results=response_content)
+            dispatcher.utter_message(text=search_success_message.format(name=slots["drug_name"], response=response_content[0], matches=len(response_content)))
         else:
             # The search was unsuccessful
             search_failure_message = "The search for {name} was unsuccessful. The error was {error}"
@@ -97,6 +103,24 @@ class ActionIdentifyDrugFullSearch(Action):
         ## Confirm search for user
         search_confirmation = "Performing search for {color} pill with a {shape} shape and imprint of {imprint}."
         dispatcher.utter_message(text=search_confirmation.format(color=slots["drug_color"], shape=slots["drug_shape"], imprint=slots["drug_imprint"]))
+
+        ## Perform search
+        # TODO: Convert the drug imprint to numerical format: https://stackoverflow.com/questions/493174/is-there-a-way-to-convert-number-words-to-integers
+        search_url = _rx_id_url + '/dev/drug/search/getRxIdentifier?drugColor=' + slots["drug_color"] + '&drugShape=' + slots["drug_shape"] + '&drugImprint=' + slots["drug_imprint"]
+        search_response = requests.get(search_url, headers={"x-api-key":_rx_id_api_key})
+        search_url_message = "{url}"
+        dispatcher.utter_message(text=search_url_message.format(url=search_url))
+        if search_response.status_code == 200:
+            # The search was successful
+            #response_content = json.loads(search_response.content)["identifier"]["nlmRxImages"]
+
+            # Check to see if more than one match came back
+            search_success_message = "{response}"#rxid_search_util.is_multiple_match(self, search_results=response_content)
+            dispatcher.utter_message(text=search_success_message.format(response=json.loads(search_response.content)))
+        else:
+            # The search was unsuccessful
+            search_failure_message = "The search for a prescription with was unsuccessful. The error was {error}"
+            dispatcher.utter_message(text=search_failure_message.format(error=search_response.content))
 
         return [SlotSet(slot, value) for slot, value in slots.items()]
 
